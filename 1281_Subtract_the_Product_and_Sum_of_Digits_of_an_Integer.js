@@ -1,5 +1,5 @@
 /**
- * @param {number} n
+ * @param {number} num
  * @return {number}
  */
 var subtractProductAndSum = function(num) {
