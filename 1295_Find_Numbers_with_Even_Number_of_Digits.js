@@ -1,19 +1,24 @@
 /**
  * @param {number[]} nums
- * @return {number}
+ * @return {number[]}
  */
-var findNumbers = function(nums) {
-  let count = 0;
-  for (let i = 0; i < nums.length; i++) {
-    let num = nums[i];
-    let numberOfDigits = 0;
-    while (num >= 1)
-    {
-      num /= 10;
-      numberOfDigits++;
-    }
+var smallerNumbersThanCurrent = function(nums) {
+  const amount = nums.length;
+  let sorted = [...nums].sort((a, b) => a - b);
+  let howManyAreLessOf = {};
 
-    if (numberOfDigits % 2 === 0) count++;
+  // count for each int how many int in array are less than current int
+  for (let i = 0; i < amount; i++) {
+    const current = sorted[i];
+    if (!howManyAreLessOf.hasOwnProperty(current)) {
+      howManyAreLessOf[current] = amount - (amount - i);
+    }
   }
-  return count;
+
+  // create result array
+  let result = [];
+  for (let i = 0; i < nums.length; i++) {
+    result.push(howManyAreLessOf[nums[i]]);
+  }
+  return result;
 };
