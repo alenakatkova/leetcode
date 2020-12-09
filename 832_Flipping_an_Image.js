@@ -3,13 +3,20 @@
  * @return {number[][]}
  */
 var flipAndInvertImage = function(A) {
-  let result = [];
+  let current;
   for (let i = 0; i < A.length; i++) {
-    let row = [];
-    for (let j = A[i].length - 1; j >= 0; j--) {
-      row.push(A[i][j] === 0 ? 1 : 0);
+    let pointer1 = 0,
+        pointer2 = A[i].length - 1;
+
+    while (pointer1 < pointer2 && pointer1 !== pointer2) {
+      if (A[i][pointer1] === A[i][pointer2]) {
+        A[i][pointer1] = A[i][pointer2] = A[i][pointer1]^1;
+      }
+      pointer1++;
+      pointer2--;
     }
-    result.push(row);
+
+    if (pointer1 === pointer2) A[i][pointer1] ^= 1;
   }
-  return result;
+  return A;
 };
