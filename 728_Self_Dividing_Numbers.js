@@ -7,16 +7,17 @@ const selfDividingNumbers = (left, right) => {
   let result = [];
 
   for (let i = left; i <= right; i++) {
-    let str = i.toString();
-    let isSelfDividing = true;
-    for (let j = 0; j < str.length; j++) {
-      let num = Number(str[j]);
-      if (num === 0 || i % num !== 0) {
-        isSelfDividing = false;
+    let num = i;
+    let isSelfDeviding = true;
+    while (num > 0) {
+      let remainder = num % 10;
+      if (remainder === 0 || i % remainder !== 0) {
+        isSelfDeviding = false;
         break;
       }
+      num = (num - remainder) / 10;
     }
-    if (isSelfDividing) result.push(i);
+    if (isSelfDeviding) result.push(i);
   }
 
   return result;
