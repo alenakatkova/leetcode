@@ -3,9 +3,9 @@
  * @return {number}
  */
 var repeatedNTimes = function(A) {
-  let met = {};
+  let met = new Set();
   for (let i = 0; i <= A.length / 2 + 1; i++) {
-    if (met.hasOwnProperty(A[i])) return A[i];
-    else met[A[i]] = true;
+    if (met.has(A[i])) return A[i];
+    else met.add(A[i]);
   }
 };
