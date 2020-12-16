@@ -1,25 +1,26 @@
+const calculateTopFiveAverage = (scores) => {
+  return Math.floor(scores
+      .sort((a, b) => b - a)
+      .slice(0, 5)
+      .reduce((a, b) => a + b, 0) / 5);
+};
+
+
 /**
  * @param {number[][]} items
  * @return {number[][]}
  */
-var highFive = function(items) {
+const highFive = (items) => {
   let result = [];
-  let scoresById = items.reduce((acc, cur) => {
-    if (!acc[cur[0]]) {
-      acc[cur[0]] = [cur[1]];
-    } else {
-      acc[cur[0]] = [...acc[cur[0]], cur[1]];
-    }
+
+  let students = items.reduce((acc, cur) => {
+    acc[cur[0]] = acc[cur[0]] ? [...acc[cur[0]], cur[1]] : [cur[1]];
     return acc;
   }, {});
 
-  for (let id in scoresById) {
-    let topFive = 0;
-    let sorted = scoresById[id].sort((a, b) => b - a);
-    for (let i = 0; i < 5; i++) {
-      topFive += sorted[i];
-    }
-    result.push([id, Math.floor(topFive / 5)]);
+  for (let student in students) {
+    result.push([student, calculateTopFiveAverage(students[student])]);
   }
+
   return result.sort((a, b) => a[0] - b[0]);
 };
