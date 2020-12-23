@@ -4,21 +4,22 @@
  * @param {number[]} arr3
  * @return {number[]}
  */
-var arraysIntersection = function(arr1, arr2, arr3) {
-  let frequencies = {};
+const arraysIntersection = (arr1, arr2, arr3) => {
+  let result = [];
+  let p1 = 0;
+  let p2 = 0;
+  let p3 = 0;
 
-  for (let i = 0; i < arr1.length; i++) {
-    if (!frequencies.hasOwnProperty(arr1[i])) frequencies[arr1[i]] = 1;
-    else frequencies[arr1[i]]++;
+  while (p1 < arr1.length && p2 < arr2.length && p3 < arr3.length) {
+    if (arr1[p1] === arr2[p2] && arr2[p2] === arr3[p3]) {
+      result.push(arr1[p1]);
+      p1++;
+      p2++;
+      p3++;
+    } else if (arr1[p1] < arr2[p2]) p1++;
+    else if (arr2[p2] < arr3[p3]) p2++;
+    else p3++;
   }
 
-  for (let i = 0; i < arr2.length; i++) {
-    if (frequencies.hasOwnProperty(arr2[i])) frequencies[arr2[i]]++;
-  }
-
-  for (let i = 0; i < arr3.length; i++) {
-    if (frequencies.hasOwnProperty(arr3[i])) frequencies[arr3[i]]++;
-  }
-
-  return Object.keys(frequencies).filter(a => frequencies[a] === 3);
+  return result;
 };
