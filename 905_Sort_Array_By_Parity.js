@@ -3,5 +3,11 @@
  * @return {number[]}
  */
 const sortArrayByParity = (A) => {
-  return A.sort((a, b) => a % 2 - b % 2);
+  let odds = [];
+  let evens = [];
+  for (let i = 0; i < A.length; i++) {
+    if (A[i] % 2 === 0) evens.push(A[i]);
+    else odds.push(A[i]);
+  }
+  return evens.concat(odds);
 };
