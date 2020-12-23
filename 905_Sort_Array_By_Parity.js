@@ -3,10 +3,5 @@
  * @return {number[]}
  */
 const sortArrayByParity = (A) => {
-  let result = [];
-  for (let i = 0; i < A.length; i++) {
-    if (A[i] % 2 === 0) result.unshift(A[i]);
-    else result.push(A[i]);
-  }
-  return result;
+  return A.sort((a, b) => a % 2 - b % 2);
 };
