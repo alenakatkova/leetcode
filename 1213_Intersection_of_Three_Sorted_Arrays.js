@@ -5,17 +5,20 @@
  * @return {number[]}
  */
 var arraysIntersection = function(arr1, arr2, arr3) {
-  let set1 = new Set(arr1);
-  let set2 = new Set(arr2);
-  let set3 = new Set(arr3);
+  let frequencies = {};
 
-  for (let item of set2) {
-    if (!set1.has(item)) set2.delete(item);
+  for (let i = 0; i < arr1.length; i++) {
+    if (!frequencies.hasOwnProperty(arr1[i])) frequencies[arr1[i]] = 1;
+    else frequencies[arr1[i]]++;
   }
 
-  for (let item of set3) {
-    if (!set2.has(item)) set3.delete(item);
+  for (let i = 0; i < arr2.length; i++) {
+    if (frequencies.hasOwnProperty(arr2[i])) frequencies[arr2[i]]++;
   }
 
-  return Array.from(set3);
+  for (let i = 0; i < arr3.length; i++) {
+    if (frequencies.hasOwnProperty(arr3[i])) frequencies[arr3[i]]++;
+  }
+
+  return Object.keys(frequencies).filter(a => frequencies[a] === 3);
 };
